@@ -5,7 +5,7 @@ test.describe("Sign Up - positive flow", () => {
   const user = {
     name: "Oleksii",
     lastName: "Kud",
-    email: `phpcarieer${Date.now()}@gmail.com`,
+    email: `aqa-phpcarieer${Date.now()}@gmail.com`,
     password: "1234567Aa_",
   };
 
