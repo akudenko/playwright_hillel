@@ -53,58 +53,276 @@ test.describe("Sign Up - negative flows", () => {
       .click();
   });
 
-  test("Validation by required fields", async ({ page }) => {
-    const validationMessages = [
-      "Name required",
-      "Last name required",
-      "Email required",
-      "Password required",
-      "Re-enter password required",
-    ];
-
+  test("Name field should be required", async ({ page }) => {
     await page.locator("#signupName").focus();
     await page.locator("#signupName").blur();
-    await page.locator("#signupLastName").focus();
-    await page.locator("#signupLastName").blur();
-    await page.locator("#signupEmail").focus();
-    await page.locator("#signupEmail").blur();
-    await page.locator("#signupPassword").focus();
-    await page.locator("#signupPassword").blur();
-    await page.locator("#signupRepeatPassword").focus();
-    await page.locator("#signupRepeatPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Name required"
+    );
 
-    await expect(page.locator(".invalid-feedback p")).toHaveCount(5);
-    await expect(page.locator(".invalid-feedback p")).toHaveCount(5);
-    await expect(
-      page.locator(".modal-content .btn-primary", { hasText: "Register" })
-    ).toBeDisabled();
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
 
-    for (let i = 0; i < validationMessages.length; i++) {
-      await expect(page.locator(".invalid-feedback p").nth(i)).toHaveText(
-        validationMessages[i]
-      );
-      await expect(page.locator(".invalid-feedback p").nth(i)).toHaveCSS(
-        "color",
-        "rgb(220, 53, 69)"
-      );
-    }
-
-    for (let i = 0; i < 5; i++) {
-      await expect(page.locator("form input").nth(i)).toHaveCSS(
-        "border-color",
-        "rgb(220, 53, 69)"
-      );
-    }
+    await expect(page.locator("#signupName")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
   });
 
-  test("Validation by wrong data", async ({ page }) => {
-    const validationMessages = [
-      "Name is invalid",
-      "Last name is invalid",
-      "Email is incorrect",
-      "Passwords do not match",
-    ];
+  test("Name field should display validation by wrong data", async ({
+    page,
+  }) => {
+    await page.locator("#signupName").fill("123");
+    await page.locator("#signupName").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Name is invalid"
+    );
 
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+
+    await expect(page.locator("#signupName")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("Name field should display validation by wrong length", async ({
+    page,
+  }) => {
+    await page.locator("#signupName").fill("a");
+    await page.locator("#signupName").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Name has to be from 2 to 20 characters long"
+    );
+
+    await page.locator("#signupName").clear();
+    await page
+      .locator("#signupName")
+      .fill("Oleksiiiiiiiiiiiiiiiisdsdsdsdsdsdsdsd");
+    await page.locator("#signupName").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Name has to be from 2 to 20 characters long"
+    );
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupName")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("LastName field should be required", async ({ page }) => {
+    await page.locator("#signupLastName").focus();
+    await page.locator("#signupLastName").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Last name required"
+    );
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupLastName")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("LastName field should display validation by wrong data", async ({
+    page,
+  }) => {
+    await page.locator("#signupLastName").fill("123");
+    await page.locator("#signupLastName").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Last name is invalid"
+    );
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupLastName")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("LastName field should display validation by wrong length", async ({
+    page,
+  }) => {
+    await page.locator("#signupLastName").fill("K");
+    await page.locator("#signupLastName").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Last name has to be from 2 to 20 characters long"
+    );
+
+    await page.locator("#signupLastName").clear();
+    await page
+      .locator("#signupLastName")
+      .fill("Kudenkooooooooooooooooooooooooooooo");
+    await page.locator("#signupLastName").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Last name has to be from 2 to 20 characters long"
+    );
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupLastName")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("Email field should be required", async ({ page }) => {
+    await page.locator("#signupEmail").focus();
+    await page.locator("#signupEmail").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Email required"
+    );
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupEmail")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("Email field should display validation by wrong data", async ({
+    page,
+  }) => {
+    await page.locator("#signupEmail").fill("okudenko");
+    await page.locator("#signupEmail").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Email is incorrect"
+    );
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupEmail")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("Password field should be required", async ({ page }) => {
+    await page.locator("#signupPassword").focus();
+    await page.locator("#signupPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Password required"
+    );
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupPassword")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("Password field should display validation by wrong data", async ({
+    page,
+  }) => {
+    await page.locator("#signupPassword").fill("1234567");
+    await page.locator("#signupPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter"
+    );
+
+    await page.locator("#signupPassword").clear();
+    await page.locator("#signupPassword").fill("123456789101112131415");
+    await page.locator("#signupPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter"
+    );
+
+    await page.locator("#signupPassword").clear();
+    await page.locator("#signupPassword").fill("12345678");
+    await page.locator("#signupPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter"
+    );
+
+    await page.locator("#signupPassword").clear();
+    await page.locator("#signupPassword").fill("12345678A");
+    await page.locator("#signupPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter"
+    );
+
+    await page.locator("#signupPassword").clear();
+    await page.locator("#signupPassword").fill("12345678a");
+    await page.locator("#signupPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter"
+    );
+
+    await page.locator("#signupPassword").clear();
+    await page.locator("#signupPassword").fill("12345678!");
+    await page.locator("#signupPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter"
+    );
+
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupPassword")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("RepeatPassword field should be required", async ({ page }) => {
+    await page.locator("#signupRepeatPassword").focus();
+    await page.locator("#signupRepeatPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Re-enter password required"
+    );
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupRepeatPassword")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("RepeatPassword field should display validation by wrong data", async ({
+    page,
+  }) => {
+    await page.locator("#signupPassword").fill("1234567Aa_");
+
+    await page.locator("#signupRepeatPassword").fill("1234567A");
+    await page.locator("#signupRepeatPassword").blur();
+    await expect(page.locator(".invalid-feedback p")).toHaveText(
+      "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter"
+    );
+
+    await expect(page.locator(".invalid-feedback p")).toHaveCSS(
+      "color",
+      "rgb(220, 53, 69)"
+    );
+    await expect(page.locator("#signupRepeatPassword")).toHaveCSS(
+      "border-color",
+      "rgb(220, 53, 69)"
+    );
+  });
+
+  test("Register button should be disabled if any required field has an error", async ({
+    page,
+  }) => {
     await page.locator("#signupName").fill("123");
     await page.locator("#signupLastName").fill("123");
     await page.locator("#signupEmail").fill("okudenko");
@@ -115,58 +333,8 @@ test.describe("Sign Up - negative flows", () => {
     await page.locator("#signupRepeatPassword").focus();
     await page.locator("#signupRepeatPassword").blur();
 
-    await expect(page.locator(".invalid-feedback p")).toHaveCount(4);
     await expect(
       page.locator(".modal-content .btn-primary", { hasText: "Register" })
     ).toBeDisabled();
-
-    for (let i = 0; i < validationMessages.length; i++) {
-      await expect(page.locator(".invalid-feedback p").nth(i)).toHaveText(
-        validationMessages[i]
-      );
-    }
-  });
-
-  test("Validation by wrong length", async ({ page }) => {
-    const validationMessages = [
-      "Name has to be from 2 to 20 characters long",
-      "Last name has to be from 2 to 20 characters long",
-      "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter",
-      "Password has to be from 8 to 15 characters long and contain at least one integer, one capital, and one small letter",
-    ];
-
-    await page.locator("#signupName").fill("a");
-    await page.locator("#signupLastName").fill("K");
-    await page.locator("#signupPassword").fill("123");
-    await page.locator("#signupRepeatPassword").fill("123");
-    await page.locator("#signupRepeatPassword").blur();
-
-    for (let i = 0; i < validationMessages.length; i++) {
-      await expect(page.locator(".invalid-feedback p").nth(i)).toHaveText(
-        validationMessages[i]
-      );
-    }
-
-    await expect(
-        page.locator(".modal-content .btn-primary", { hasText: "Register" })
-      ).toBeDisabled();
-
-    await page.locator("#signupName").fill("Oleksiiiiiiiiiiiiiiii");
-    await page.locator("#signupLastName").fill("Kudenkooooooooooooooooooooo");
-    await page.locator("#signupPassword").fill("123456789101112131415");
-    await page
-      .locator("#signupRepeatPassword")
-      .fill("112345678910111213141523");
-    await page.locator("#signupRepeatPassword").blur();
-
-    for (let i = 0; i < validationMessages.length; i++) {
-      await expect(page.locator(".invalid-feedback p").nth(i)).toHaveText(
-        validationMessages[i]
-      );
-    }
-
-    await expect(
-        page.locator(".modal-content .btn-primary", { hasText: "Register" })
-      ).toBeDisabled();
   });
 });
