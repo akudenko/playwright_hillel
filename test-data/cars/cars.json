@@ -1,0 +1,43 @@
+{
+    "expenses": [],
+    "cars": [
+      {
+        "id": 1,
+        "brand": "Audi",
+        "model": "TT",
+        "logo": "audi.png",
+        "initialMileage": 200,
+        "updatedMileageAt": "2025-02-14T22:43:40.839Z",
+        "carCreatedAt": "2025-02-14T22:43:40.839Z",
+        "carBrandId": 1,
+        "carModelId": 1,
+        "mileage": 200
+      },
+      {
+        "id": 2,
+        "brand": "Audi",
+        "model": "A6",
+        "logo": "audi.png",
+        "initialMileage": 300,
+        "updatedMileageAt": "2025-02-14T22:43:52.233Z",
+        "carCreatedAt": "2025-02-14T22:43:52.233Z",
+        "carBrandId": 1,
+        "carModelId": 4,
+        "mileage": 300
+      },
+      {
+        "id": 3,
+        "brand": "Fiat",
+        "model": "Scudo",
+        "logo": "fiat.png",
+        "initialMileage": 500,
+        "updatedMileageAt": "2025-02-14T22:44:02.721Z",
+        "carCreatedAt": "2025-02-14T22:44:02.721Z",
+        "carBrandId": 5,
+        "carModelId": 23,
+        "mileage": 500
+      }
+    ],
+    "nextCarId": 4,
+    "nextExpenseId": 1
+  }

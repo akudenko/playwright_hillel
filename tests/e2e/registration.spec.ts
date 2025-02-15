@@ -1,10 +1,9 @@
 import { test, expect } from "@playwright/test";
-import { describe } from "node:test";
-import HomePage from "../pages/HomePage";
-import SignUpForm from "../pages/forms/SignUpForm";
-import SignInForm from "../pages/forms/SignInForm";
-import GaragePage from "../pages/admin/GaragePage";
-import ProfilePage from "../pages/admin/ProfilePage";
+import HomePage from "../../pages/HomePage";
+import SignUpForm from "../../pages/forms/SignUpForm";
+import SignInForm from "../../pages/forms/SignInForm";
+import GaragePage from "../../pages/admin/GaragePage";
+import ProfilePage from "../../pages/admin/ProfilePage";
 
 test.describe("Sign Up - positive flow", () => {
   let homePage: HomePage;
