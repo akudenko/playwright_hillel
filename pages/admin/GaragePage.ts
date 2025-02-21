@@ -14,7 +14,7 @@ export default class GaragePage {
   readonly emptyGarageMessage: Locator;
 
   constructor(private readonly page: Page) {
-    this.title = page.locator(".h3");
+    this.title = page.locator("h1");
     this.addNewCarBtn = page.locator(".panel-page_heading button");
     this.brandDropdown = page.locator("#addCarBrand");
     this.modelDropdown = page.locator("#addCarModel");

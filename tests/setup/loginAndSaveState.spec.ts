@@ -24,7 +24,7 @@ test.describe("Save session storage", () => {
   test("Do login and save a storage state", async ({ page }) => {
     await signInForm.loginWithCredentials(process.env.ADMIN_USER_EMAIL ?? '', process.env.ADMIN_USER_PASSWORD ?? '');
     await expect(await garagePage.getTitle()).toHaveText(
-      `You don’t have any cars in your garage`
+      `Garage`
     );
     await page.context().storageState({ path: 'test-data/states/adminUserState.json'});
   });
