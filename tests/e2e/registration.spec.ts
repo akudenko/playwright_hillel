@@ -38,7 +38,7 @@ test.describe("Sign Up - positive flow", () => {
     await signUpForm.clickOnRegisterBtn();
 
     await expect(await garagePage.getTitle()).toHaveText(
-      `You don’t have any cars in your garage`
+      `Garage`
     );
 
     await profilePage.open();
