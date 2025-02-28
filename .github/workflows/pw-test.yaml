@@ -5,7 +5,7 @@ on:
       test_parameters:
         description: 'Provide test params'
         required: false
-        default: ' '
+        default: ''
 jobs:
   test:
     env:
