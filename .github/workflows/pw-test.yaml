@@ -6,6 +6,12 @@ on:
     branches: [ main, master ]
 jobs:
   test:
+    env:
+      BASE_URL: ${{ secrets.BASE_URL }}
+      USER_NAME: ${{ secrets.USER_NAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      ADMIN_USER_EMAIL: ${{ secrets.ADMIN_USER_EMAIL }}
+      ADMIN_USER_PASSWORD: ${{ secrets.ADMIN_USER_PASSWORD }}
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
