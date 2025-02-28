@@ -5,7 +5,7 @@ import HomePage from "../../pages/HomePage";
 import SignInForm from "../../pages/forms/SignInForm";
 
 test.describe("Garage Tests", () => {
-  test.use({ storageState: "test-results/adminUserState.json" });
+  test.use({ storageState: "test-data/states/adminUserState.json" });
 
   let garagePage: GaragePage;
   let alertComponent: AlertComponent;
@@ -27,9 +27,9 @@ test.describe("Garage Tests", () => {
     await garagePage.removeAllCars();
   });
 
-  test.afterEach(async () => {
-    await garagePage.removeAllCars();
-  });
+  // test.afterEach(async () => {
+  //   await garagePage.removeAllCars();
+  // });
 
   test("User is able to add BMW car to the garage", async () => {
     await garagePage.openAddNewCarPopupByClick();

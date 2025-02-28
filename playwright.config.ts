@@ -7,7 +7,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: '90%',
-  reporter: [['list'], ['html']],
+  reporter: [['list'], ['html', {open: 'never'}]],
   use: {
     baseURL: process.env.BASE_URL,
     httpCredentials: {
