@@ -12,7 +12,7 @@ on:
         default: 'test'
         type: choice
         options:
-          - test
+          - all
           - e2e
           - api
 jobs:
@@ -39,7 +39,12 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install chromium --with-deps
     - name: Run Playwright tests
-      run: npx playwright ${{ inputs.test_suite }}
+      run: |
+        if [[ "${{ inputs.test_suite }}" == "all" ]]; then
+          npx playwright test
+        else
+          npx playwright test tests/${{ inputs.test_suite }}
+        fi
     - uses: actions/upload-artifact@v4
       if: always()
       with:
