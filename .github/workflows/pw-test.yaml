@@ -19,11 +19,11 @@ on:
           - e2e
           - api
 run-name: >
-  Playwright Tests (${{ inputs.test_suite || 'all' }}) - 
-  ${{ github.event_name == 'workflow_dispatch' && 'Manual run' }} 
-  ${{ github.event_name == 'schedule' && 'Scheduled (cron)' }} 
-  ${{ github.event_name == 'push' && format('Commit: {0}', github.event.head_commit.message) }} 
-  ${{ github.event_name == 'pull_request' && 'Triggered by PR' }}
+  Playwright Tests (${{ inputs.test_suite || 'all' }}) -
+  ${{ github.event_name == 'workflow_dispatch' && 'Manual run' || '' }}
+  ${{ github.event_name == 'schedule' && 'Scheduled (cron)' || '' }}
+  ${{ github.event_name == 'push' && format('Commit: {0}', github.event.head_commit.message) || '' }}
+  ${{ github.event_name == 'pull_request' && 'Triggered by PR' || '' }}
 jobs:
   test:
     name: Playwright Tests (${{ inputs.test_suite }})
