@@ -15,7 +15,7 @@ on:
           - all
           - e2e
           - api
-run-name: Playwright Tests (${{ inputs.test_suite }})
+run-name: Playwright Tests (${{ inputs.test_suite || 'all' }}) - ${{ github.event_name == 'workflow_dispatch' && 'Manual run' || 'Triggered by commit' }}
 jobs:
   test:
     name: Playwright Tests (${{ inputs.test_suite }})
