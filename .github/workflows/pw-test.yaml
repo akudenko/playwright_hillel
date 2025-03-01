@@ -9,10 +9,10 @@ on:
       test_suite:
         description: 'Select test suite to run'
         required: true
-        default: 'all'
+        default: 'test'
         type: choice
         options:
-          - all
+          - test
           - e2e
           - api
 jobs:
@@ -39,7 +39,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install chromium --with-deps
     - name: Run Playwright tests
-      run: npx playwright test ${{ inputs.test_suite }}
+      run: npx playwright ${{ inputs.test_suite }}
     - uses: actions/upload-artifact@v4
       if: always()
       with:
