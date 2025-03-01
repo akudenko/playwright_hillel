@@ -1,4 +1,4 @@
-name: Playwright Tests (${{ inputs.test_suite }})
+name: Playwright Tests
 on:
   push:
     branches: [ main, master ]
@@ -17,6 +17,7 @@ on:
           - api
 jobs:
   test:
+    name: Playwright Tests (${{ inputs.test_suite }})
     env:
       BASE_URL: ${{ secrets.BASE_URL }}
       USER_NAME: ${{ secrets.USER_NAME }}
