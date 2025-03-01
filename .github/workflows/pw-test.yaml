@@ -39,7 +39,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install chromium --with-deps
     - name: Run Playwright tests
-      run: npx playwright test ${{ inputs.test_parameters }}
+      run: npx playwright test ${{ inputs.test_suite }}
     - uses: actions/upload-artifact@v4
       if: always()
       with:
@@ -59,7 +59,7 @@ jobs:
       - name: Download Playwright report artifact
         uses: actions/download-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report-${{ github.run_id }}
           path: out
       - name: Setup Pages
         uses: actions/configure-pages@v5
